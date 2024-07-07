@@ -32,7 +32,7 @@ def get_url(url_id):
     checks = db.get_url_check(url_id)
     messages = get_flashed_messages(with_categories=True)
     return render_template('url.html',
-                           url_id=url_id, name=name, date=date,
+                           url_id=url_id, name=name, # date=date
                            messages=messages, checks=checks), 200
 
 
@@ -46,7 +46,7 @@ def post_url():
         for error in errors:
             flash(error, 'danger')
         messages = get_flashed_messages(with_categories=True)
-        return render_template('index.html', url='', messages=messages), 422
+        return render_template('index.html', messages=messages), 422 # url=''
 
     parsed_url = urlparse(url)
     new_url = urlunparse((parsed_url.scheme, parsed_url.netloc, '', '', '', ''))
