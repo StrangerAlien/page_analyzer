@@ -28,7 +28,7 @@ def get_all_urls():
 @app.get('/urls/<int:url_id>')
 def get_url(url_id):
     url_data = db.get_data_by_id(url_id)
-    name = url_data[1]  # name, date = url_data[1], url_data[2]
+    name = url_data[1]
     checks = db.get_url_check(url_id)
     messages = get_flashed_messages(with_categories=True)
     return render_template('url.html',
@@ -84,7 +84,7 @@ def post_url_checks(url_id):
     return redirect(url_for('get_url', url_id=url_id), 302)
 
 
-###################################
+################################
 
 
 def correct_url(url):
