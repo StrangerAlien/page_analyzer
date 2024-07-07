@@ -33,7 +33,7 @@ def get_url(url_id):
     messages = get_flashed_messages(with_categories=True)
     return render_template('url.html',
                            url_id=url_id, name=name, date=date,
-                           messages=messages, checks=checks)
+                           messages=messages, checks=checks), 200
 
 
 @app.post('/urls')
