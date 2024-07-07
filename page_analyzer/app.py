@@ -28,11 +28,11 @@ def get_all_urls():
 @app.get('/urls/<int:url_id>')
 def get_url(url_id):
     url_data = db.get_data_by_id(url_id)
-    name, date = url_data[1], url_data[2]
+    name = url_data[1]  # name, date = url_data[1], url_data[2]
     checks = db.get_url_check(url_id)
     messages = get_flashed_messages(with_categories=True)
     return render_template('url.html',
-                           url_id=url_id, name=name, # date=date
+                           url_id=url_id, name=name,
                            messages=messages, checks=checks), 200
 
 
@@ -46,7 +46,7 @@ def post_url():
         for error in errors:
             flash(error, 'danger')
         messages = get_flashed_messages(with_categories=True)
-        return render_template('index.html', messages=messages), 422 # url=''
+        return render_template('index.html', messages=messages), 422
 
     parsed_url = urlparse(url)
     new_url = urlunparse((parsed_url.scheme, parsed_url.netloc, '', '', '', ''))
