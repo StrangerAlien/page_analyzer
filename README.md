@@ -27,7 +27,7 @@ Page Analyzer – это сайт, который анализирует ука�
 ### Install
 
 ```bash
-git https://github.com/StrangerAlien/python-project-83
+git clone https://github.com/StrangerAlien/python-project-83
 
 cd python-project-83
 
@@ -39,3 +39,6 @@ make start
 
 - SECRET_KEY - со значением секрета для работы приложения.
 - DATABASE_URL - путь к вашей подготовленной базе данных в виде унифицированного идентификатора ресурса (URI): 'postgresql://user:password@host:port/database_name'.
+
+
+
