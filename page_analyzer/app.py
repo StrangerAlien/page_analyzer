@@ -1,4 +1,7 @@
 import requests
+import validators
+from bs4 import BeautifulSoup
+
 from flask import (Flask, render_template, request, flash,
                    redirect, url_for, get_flashed_messages)
 
@@ -6,9 +9,7 @@ from page_analyzer.secrets import SECRET_KEY
 from page_analyzer import actions_with_db as db
 
 from urllib.parse import urlparse, urlunparse
-import validators
 
-from bs4 import BeautifulSoup
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = SECRET_KEY
