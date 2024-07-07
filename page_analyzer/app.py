@@ -46,7 +46,7 @@ def post_url():
         for error in errors:
             flash(error, 'danger')
         messages = get_flashed_messages(with_categories=True)
-        return render_template('index.html', url='', messages=messages)
+        return render_template('index.html', url='', messages=messages), 422
 
     parsed_url = urlparse(url)
     new_url = urlunparse((parsed_url.scheme, parsed_url.netloc, '', '', '', ''))
@@ -58,7 +58,7 @@ def post_url():
 
     new_id = db.save_url(new_url)
     flash('Страница успешно добавлена', 'success')
-    return redirect(url_for('get_url', url_id=new_id[0]))
+    return redirect(url_for('get_url', url_id=new_id[0]), 302)
 
 
 @app.post('/urls/<int:url_id>/checks')
@@ -70,7 +70,7 @@ def post_url_checks(url_id):
         response.raise_for_status()
     except requests.RequestException:
         flash('Произошла ошибка при проверке', 'danger')
-        return redirect(url_for('get_url', url_id=url_id))
+        return redirect(url_for('get_url', url_id=url_id), 302)
 
     status_code = response.status_code
 
