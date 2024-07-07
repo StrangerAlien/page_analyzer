@@ -54,7 +54,7 @@ def post_url():
 
     if exist_url:
         flash('Страница уже существует', 'info')
-        return redirect(url_for('get_url', url_id=exist_url[0]))
+        return redirect(url_for('get_url', url_id=exist_url[0]), 302)
 
     new_id = db.save_url(new_url)
     flash('Страница успешно добавлена', 'success')
@@ -81,7 +81,7 @@ def post_url_checks(url_id):
     db.save_url_check(tags_data)
 
     flash('Страница успешно проверена', 'success')
-    return redirect(url_for('get_url', url_id=url_id))
+    return redirect(url_for('get_url', url_id=url_id), 302)
 
 
 ###################################
