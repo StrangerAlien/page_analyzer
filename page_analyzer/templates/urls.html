@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container-lg mt-3">
+ <h1>
+  Сайты
+ </h1>
+ <div class="table-responsive">
+  <table class="table table-bordered table-hover text-nowrap" data-test="url">
+   <thead>
+    <tr>
+     <th>
+      ID
+     </th>
+     <th>
+      Имя
+     </th>
+     <th>
+      Последняя проверка
+     </th>
+     <th>
+      Код ответа
+     </th>
+    </tr>
+   </thead>
+   <tbody>
+    {% for url in urls %}
+    <tr>
+     <td>
+      {{ url[0] or '' }}
+     </td>
+     <td>
+      <a href="urls/{{ url[0] }}">
+       {{ url[1] or '' }}
+      </a>
+     </td>
+     <td>
+      {{ url[3] or '' }}
+     </td>
+     <td>
+      {{ url[2] or '' }}
+     </td>
+    </tr>
+    {% endfor %}
+   </tbody>
+  </table>
+ </div>
+</div>
+{% endblock %}
