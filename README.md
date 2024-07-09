@@ -32,7 +32,7 @@ git clone https://github.com/StrangerAlien/python-project-83
 
 cd python-project-83
 
-make install
+make build
 make start
 ```
 
