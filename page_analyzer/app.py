@@ -1,10 +1,10 @@
 import requests
-import validators
-from bs4 import BeautifulSoup
 
 from flask import (Flask, render_template, request, flash,
                    redirect, url_for, get_flashed_messages)
 
+from page_analyzer.correct_url import correct_url
+from page_analyzer.parse_html import parse_html
 from page_analyzer.secrets import SECRET_KEY
 from page_analyzer import actions_with_db as db
 
@@ -32,7 +32,7 @@ def get_url(url_id):
     checks = db.get_url_check(url_id)
     messages = get_flashed_messages(with_categories=True)
     return render_template('url.html',
-                           url_id=url_id, name=name,
+                           url_id=url_id, url_data=url_data, name=name,
                            messages=messages, checks=checks, date=date), 200
 
 
@@ -82,32 +82,3 @@ def post_url_checks(url_id):
 
     flash('Страница успешно проверена', 'success')
     return redirect(url_for('get_url', url_id=url_id), 302)
-
-
-###############################
-
-
-def correct_url(url):
-    errors = []
-    parsed_url = urlparse(url)
-
-    if all([parsed_url.scheme, parsed_url.netloc]) and len(url) > 255:
-        errors.append('URL превышает 255 символов')
-    if validators.url(url) is not True:
-        errors.append('Некорректный URL')
-    return errors
-
-
-def parse_html(page_content):
-    result = {}
-    soup = BeautifulSoup(page_content, 'html.parser')
-
-    h1 = soup.find('h1')
-    title = soup.find('title')
-    description = soup.find('meta', attrs={'name': 'description'})
-
-    result['h1'] = h1.get_text().strip() if h1 else ''
-    result['title'] = title.get_text().strip() if title else ''
-    result['description'] = (
-        description.get('content', '').strip()) if description else ''
-    return result

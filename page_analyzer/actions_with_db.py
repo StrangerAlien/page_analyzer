@@ -16,9 +16,11 @@ def save_url(url):
     with connect_db() as conn:
         with conn.cursor() as curs:
             curs.execute('''
-                INSERT INTO urls (name, created_at) VALUES (%s, %s)
-                RETURNING id;''',
-                         (url, datetime.now()))
+                INSERT INTO urls (
+                    name,
+                    created_at)
+                VALUES (%s, %s)
+                RETURNING id;''', (url, datetime.now()))
             url_data = curs.fetchone()
             conn.commit()
             return url_data
@@ -34,25 +36,22 @@ def save_url_check(tags_data):
                     h1,
                     title,
                     description,
-                    created_at
-                )
-                VALUES (%s, %s, %s, %s, %s, %s)''',
-                         (
-                             tags_data['id'],
-                             tags_data['code'],
-                             tags_data['h1'],
-                             tags_data['title'],
-                             tags_data['description'],
-                             datetime.now()
-                         )
-                         )
+                    created_at )
+                VALUES (%s, %s, %s, %s, %s, %s)''', (
+                tags_data['id'],
+                tags_data['code'],
+                tags_data['h1'],
+                tags_data['title'],
+                tags_data['description'],
+                datetime.now()))
             conn.commit()
 
 
 def get_data_by_id(url_id):
     with connect_db() as conn:
         with conn.cursor() as curs:
-            curs.execute('SELECT * FROM urls WHERE id=%s', (url_id,))
+            curs.execute('''
+                SELECT * FROM urls WHERE id=%s''', (url_id,))
             existing = curs.fetchone()
             return existing
 
@@ -60,7 +59,8 @@ def get_data_by_id(url_id):
 def get_data_by_name(url):
     with connect_db() as conn:
         with conn.cursor() as curs:
-            curs.execute("SELECT * FROM urls WHERE name=%s", (url,))
+            curs.execute('''
+                SELECT * FROM urls WHERE name=%s''', (url,))
             existing = curs.fetchone()
             return existing
 
@@ -69,16 +69,15 @@ def get_data_all_urls():
     with connect_db() as conn:
         with conn.cursor() as curs:
             curs.execute('''
-            SELECT
-                urls.id,
-                urls.name,
-                url_checks.status_code,
-                MAX(url_checks.created_at) AS last_check
-            FROM urls
-            LEFT JOIN url_checks ON urls.id = url_checks.url_id
-            GROUP BY urls.id, urls.name, url_checks.status_code
-            ORDER BY urls.id DESC;''',
-                         )
+                SELECT
+                    urls.id,
+                    urls.name,
+                    url_checks.status_code,
+                    MAX(url_checks.created_at) AS last_check
+                FROM urls
+                LEFT JOIN url_checks ON urls.id = url_checks.url_id
+                GROUP BY urls.id, urls.name, url_checks.status_code
+                ORDER BY urls.id DESC;''', )
             url_checks = curs.fetchall()
             return url_checks
 
@@ -96,7 +95,6 @@ def get_url_check(url_id):
                     created_at
                 FROM url_checks
                 WHERE url_id = %s
-                ORDER BY id DESC''', (url_id,)
-                         )
+                ORDER BY id DESC''', (url_id,))
             checks = curs.fetchall()
             return checks

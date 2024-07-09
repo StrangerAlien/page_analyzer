@@ -6,12 +6,12 @@
 ### Описание
 Page Analyzer – это сайт, который анализирует указанные страницы на SEO-пригодность по аналогии с PageSpeed Insights:
 
-![Demo](page_analyzer.gif)
+![Demo](page_analyzer/static/page_analyzer.gif)
 
 
 ### Проверить работу и протестировать можно по ссылке:
 
-[![svg](page_analyzer.svg)](https://python-project-83-61qx.onrender.com)
+[![svg](page_analyzer/static/page_analyzer.svg)](https://python-project-83-61qx.onrender.com)
 
 
 ### Dependencies
