@@ -9,7 +9,8 @@ Page Analyzer – это сайт, который анализирует ука�
 ![Demo](page_analyzer.gif)
 
 
-### Проверить работу и протестировать можно по ссылке: [Page Analizer](https://python-project-83-61qx.onrender.com)
+### Проверить работу и протестировать можно по ссылке:
+[![svg](page_analyzer.svg)](https://python-project-83-61qx.onrender.com)
 
 
 ### Dependencies
