@@ -2,16 +2,17 @@
 
 {% block content %}
 <div class="col-12 col-md-10 col-lg-8 mx-auto border rounded-3 bg-light p-5">
- <h1 class="display-3">
-  Анализатор страниц
- </h1>
- <p class="lead">
-  Бесплатно проверяйте сайты на SEO-пригодность
- </p>
- <form action="/urls" class="d-flex justify-content-center" method="post">
-  <!--label for="text" class="visually-hidden">Url для проверки</label-->
-  <input class="form-control form-control-lg" name="url" placeholder="https://www.example.com" required="" type="text" value=""/>
-  <input class="btn btn-primary btn-lg ms-3 px-5 text-uppercase mx-3" type="submit" value="Проверить"/>
- </form>
+    <h1 class="display-3">
+        Анализатор страниц
+    </h1>
+    <p class="lead">
+        Бесплатно проверяйте сайты на SEO-пригодность
+    </p>
+    <form action="/urls" class="d-flex justify-content-center" method="post">
+        <!--label for="text" class="visually-hidden">Url для проверки</label-->
+        <input class="form-control form-control-lg" name="url" placeholder="https://www.example.com" required=""
+               type="text" value=""/>
+        <input class="btn btn-primary btn-lg ms-3 px-5 text-uppercase mx-3" type="submit" value="Проверить"/>
+    </form>
 </div>
 {% endblock %}
