@@ -15,9 +15,10 @@ def connect_db():
 def save_url(url):
     with connect_db() as conn:
         with conn.cursor() as curs:
-            curs.execute(
-                'INSERT INTO urls (name, created_at) VALUES (%s, %s) RETURNING id;',
-                (url, datetime.now()))
+            curs.execute('''
+                INSERT INTO urls (name, created_at) VALUES (%s, %s)
+                RETURNING id;''',
+                         (url, datetime.now()))
             url_data = curs.fetchone()
             conn.commit()
             return url_data
