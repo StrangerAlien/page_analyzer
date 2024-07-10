@@ -16,7 +16,7 @@ app.config['SECRET_KEY'] = SECRET_KEY
 
 @app.route('/')
 def index():
-    return render_template('index.html', messages=()), 200
+    return render_template('index.html', messages=(), url=''), 200
 
 
 @app.get('/urls')
