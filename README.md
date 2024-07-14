@@ -29,7 +29,7 @@ Page Analyzer – это сайт, который анализирует ука�
 ### Install
 
 ```bash
-git clone https://github.com/StrangerAlien/python-project-83
+git clone https://github.com/StrangerAlien/page_analyzer
 
 cd python-project-83
 
