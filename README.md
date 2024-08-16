@@ -30,7 +30,7 @@ Page Analyzer – это сайт, который анализирует ука�
 ```bash
 git clone https://github.com/StrangerAlien/page_analyzer
 
-cd python-project-83
+cd page_analyzer
 
 make build
 make start
